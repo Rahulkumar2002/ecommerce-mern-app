@@ -5,6 +5,9 @@ const helmet = require("helmet");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const port = process.env.PORT || "8800";
+const userRoutes = require("./routes/user.js");
+const authRoutes = require("./routes/auth");
+const productRoutes = require("./routes/product");
 
 dotenv.config();
 
@@ -19,9 +22,13 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopol
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
-app.get("/", (req, res) => {
-    res.send("This app is working yay");
-});
+
+//routes middleware 
+
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+
 
 app.listen(port, () => {
     console.log("App is listening at localhost:" + port);
