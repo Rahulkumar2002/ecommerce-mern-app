@@ -8,6 +8,8 @@ const port = process.env.PORT || "8800";
 const userRoutes = require("./routes/user.js");
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
+const orderRoutes = require("./routes/order");
+const cartRoutes = require("./routes/cart");
 
 dotenv.config();
 
@@ -28,6 +30,8 @@ app.use(morgan("common"));
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/carts", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 
 app.listen(port, () => {
